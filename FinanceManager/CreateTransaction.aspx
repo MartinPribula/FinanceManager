@@ -11,12 +11,14 @@
                     <td>Vyberte účet:</td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlAccount" AutoPostBack="true" />
+                        <asp:RequiredFieldValidator runat="server" ID="rfvAccount" ControlToValidate="ddlAccount" CssClass="field-validation-error" ErrorMessage="Vyberte účet." />
                     </td>
                 </tr>
                 <tr>
-                    <td>Vyberte typ záznamu:</td>
+                    <td>Vyberte kategóriu:</td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlCategory" AutoPostBack="true" />
+                        <asp:RequiredFieldValidator runat="server" ID="rfvCategory" ControlToValidate="ddlCategory" CssClass="field-validation-error" ErrorMessage="Vyberte kategóriu." />
                     </td>
                 </tr>
                 <tr>
@@ -29,6 +31,7 @@
                     <td>Suma:</td>
                     <td>
                         <asp:TextBox runat="server" ID="txtAmount" TextMode="Number" AutoPostBack="true" Width="150px" CssClass="money"/>
+                        <asp:RequiredFieldValidator runat="server" ID="rfvAmount" ControlToValidate="ddlCategory" CssClass="field-validation-error" ErrorMessage="Zadajte sumu." />
                     </td>
                     <td>Typ záznamu:</td>
                     <td>
@@ -37,13 +40,14 @@
                                 <asp:ListItem Text="Prichádzajúca" Value="incoming" />
                                 <asp:ListItem Text="Odchádzajúca" Value="outgoing" />
                             </asp:RadioButtonList>
+                            <asp:RequiredFieldValidator runat="server" ID="rfvType" ControlToValidate="ddlCategory" CssClass="field-validation-error" ErrorMessage="Vyberte typ." />
                         </div>
                     </td>
                 </tr>
                 <tr>
                     <td>Popis:</td>
                     <td colspan="3">
-                        <asp:TextBox runat="server" ID="tbDescription" AutoPostBack="true" TextMode="MultiLine" Rows="4" />
+                        <asp:TextBox runat="server" ID="tbDescription" AutoPostBack="false" TextMode="MultiLine" Rows="4" />
                     </td>
                 </tr>
                 <tr>

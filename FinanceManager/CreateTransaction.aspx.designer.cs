@@ -31,6 +31,15 @@ namespace FinanceManager {
         protected global::System.Web.UI.WebControls.DropDownList ddlAccount;
         
         /// <summary>
+        /// rfvAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAccount;
+        
+        /// <summary>
         /// ddlCategory control.
         /// </summary>
         /// <remarks>
@@ -38,6 +47,15 @@ namespace FinanceManager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+        
+        /// <summary>
+        /// rfvCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategory;
         
         /// <summary>
         /// txtCreateDate control.
@@ -58,6 +76,15 @@ namespace FinanceManager {
         protected global::System.Web.UI.WebControls.TextBox txtAmount;
         
         /// <summary>
+        /// rfvAmount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAmount;
+        
+        /// <summary>
         /// rblTransactionType control.
         /// </summary>
         /// <remarks>
@@ -65,6 +92,15 @@ namespace FinanceManager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButtonList rblTransactionType;
+        
+        /// <summary>
+        /// rfvType control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvType;
         
         /// <summary>
         /// tbDescription control.

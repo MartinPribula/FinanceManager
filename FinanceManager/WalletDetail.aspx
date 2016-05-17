@@ -8,6 +8,9 @@
                 <h1><%: Title %>.</h1>
                 <h2>Tu vidíte stav vašej peňaženky a jednotlivé účty.</h2>
             </hgroup>
+            <p>
+                <a href="CreateTransaction.aspx?id=<%=idWallet%>">Pridať transakciu.</a>
+            </p>
             <table>
                 <tr>
                     <td>Typ transakcie:</td>
@@ -33,6 +36,11 @@
                         <asp:TextBox runat="server" ID="txtTo" AutoPostBack="true" Width="150px" TextMode="Date" />
                     </td>
                 </tr>
+                <%--<tr>
+                    <td>
+                        <asp:Button runat="server" ID="btnFilter" Text="Filtruj" OnClick="btnFilter_Click" />
+                    </td>
+                </tr>--%>
             </table>
         </ContentTemplate>
     </asp:UpdatePanel>

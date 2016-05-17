@@ -131,7 +131,7 @@ namespace FinanceManager
 
             int idTransaction = Database.CreateTransaction(idWallet, Int32.Parse(ddlAccount.SelectedValue), Int32.Parse(ddlCategory.SelectedValue), ammount, tbDescription.Text, txtCreateDate.Text, transactionType);
 
-
+            Response.Redirect("/WalletDetail.aspx?id=" + idWallet);
 
         }
 

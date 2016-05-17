@@ -11,7 +11,7 @@ namespace FinanceManager
 {
     public partial class WalletDetail : System.Web.UI.Page
     {
-
+        protected int idWallet;
         protected static class TableColumns
         {
             public const string IdTransaction = "IdTransaction";
@@ -35,7 +35,6 @@ namespace FinanceManager
                 Response.Redirect("Default.aspx");
             }
 
-            int idWallet = 0;
             Int32.TryParse((string)Request.QueryString["id"], out idWallet);
             if (idUser != Database.CheckWallet(idWallet))
             {
@@ -47,6 +46,11 @@ namespace FinanceManager
                 LoadDdlValues(idWallet);
                 FillAccounts(idWallet);
             }
+            else
+            {
+
+            }
+
 
             if (idUser != 0)
             {
@@ -60,7 +64,7 @@ namespace FinanceManager
                     List<TransactionDetail> transactions = new List<TransactionDetail>();
                     foreach (var account in accounts)
                     {
-                        transactions.AddRange(Database.GetTransactionsForAccount(account.IdAccount)) ;
+                        transactions.AddRange(Database.GetTransactionsForAccount(account.IdAccount));
                     }
                     if (transactions.Count == 0)
                     {
@@ -76,7 +80,7 @@ namespace FinanceManager
                         gwTransactionsResults.DataBind();
                     }
                 }
-                
+
             }
         }
 
@@ -86,7 +90,7 @@ namespace FinanceManager
             var data = Database.GetDdlTransactionCategoryValues(idWallet);
 
             ddlCategory.Items.Clear();
-            ddlCategory.Items.Add(new ListItem { Value = "", Text = "Všerky kategórie." });
+            ddlCategory.Items.Add(new ListItem { Value = "", Text = "Všetky kategórie." });
             foreach (var item in data)
             {
                 ddlCategory.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Name });
@@ -109,6 +113,11 @@ namespace FinanceManager
         protected void btnClearCategory_Click(object sender, EventArgs e)
         {
             ddlCategory.SelectedValue = "";
+        }
+
+        protected void btnFilter_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
