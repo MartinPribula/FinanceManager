@@ -1,0 +1,101 @@
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\FinanceManager.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\FinanceManager.pdb
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Antlr3.Runtime.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\EntityFramework.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\System.Web.Optimization.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\System.Web.Providers.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\WebGrease.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\EntityFramework.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\obj\Debug\FinanceManager.dll
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\obj\Debug\FinanceManager.pdb
+C:\Users\Maco.Maco-PC\Documents\Visual Studio 2012\Projects\FinanceManager\FinanceManager\bin\System.Transactions.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\FinanceManager.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\FinanceManager.pdb
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Antlr3.Runtime.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\EntityFramework.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.MSAjax.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.WebForms.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.Web.Infrastructure.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\System.Transactions.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\System.Web.Optimization.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\System.Web.Providers.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\WebGrease.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\EntityFramework.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.xml
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\obj\Debug\FinanceManager.dll
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\obj\Debug\FinanceManager.pdb
+c:\FinanceManager\FinanceManager\FinanceManager\bin\FinanceManager.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\FinanceManager.pdb
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Antlr3.Runtime.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\AspNet.ScriptManager.jQuery.UI.Combined.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\EntityFramework.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Web.Optimization.WebForms.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.MSAjax.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.ScriptManager.WebForms.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.Web.Infrastructure.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\System.Transactions.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\System.Web.Optimization.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\System.Web.Providers.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\WebGrease.dll
+c:\FinanceManager\FinanceManager\FinanceManager\bin\EntityFramework.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.Core.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OAuth.Consumer.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.OpenId.RelyingParty.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\DotNetOpenAuth.AspNet.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.AspNet.Membership.OpenAuth.xml
+c:\FinanceManager\FinanceManager\FinanceManager\bin\Microsoft.AspNet.FriendlyUrls.xml
+c:\FinanceManager\FinanceManager\FinanceManager\obj\Debug\FinanceManager.csprojResolveAssemblyReference.cache
+c:\FinanceManager\FinanceManager\FinanceManager\obj\Debug\FinanceManager.dll
+c:\FinanceManager\FinanceManager\FinanceManager\obj\Debug\FinanceManager.pdb
+C:\Bordel\Sukromne\Projects\FinanceManager\FinanceManager\obj\Debug\FinanceManager.csprojResolveAssemblyReference.cache
