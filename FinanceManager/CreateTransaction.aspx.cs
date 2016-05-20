@@ -38,19 +38,23 @@ namespace FinanceManager
             }
             else
             {
-                float amount = float.Parse(txtAmount.Text);
-                if (rblTransactionType.SelectedValue == "outgoing")
+                if (txtAmount.Text != "")
                 {
-                    if (amount > 0)
-                        txtAmount.Text = (-1 * amount).ToString();
-                }
-                else
-                {
-                    if (amount < 0)
+                    float amount = float.Parse(txtAmount.Text);
+                    if (rblTransactionType.SelectedValue == "outgoing")
                     {
-                        txtAmount.Text = (-1 * amount).ToString();
+                        if (amount > 0)
+                            txtAmount.Text = (-1 * amount).ToString();
+                    }
+                    else
+                    {
+                        if (amount < 0)
+                        {
+                            txtAmount.Text = (-1 * amount).ToString();
+                        }
                     }
                 }
+
             }
 
             if (txtCreateDate.Text == null || txtCreateDate.Text == "")
@@ -108,14 +112,13 @@ namespace FinanceManager
 
         protected void btnNewTransaction_Click(object sender, EventArgs e)
         {
-
             float ammount = float.Parse(txtAmount.Text);
             int transactionType = 0;
 
             if (rblTransactionType.SelectedValue == "outgoing")
             {
                 transactionType = -1;
-                if(ammount > 0)
+                if (ammount > 0)
                 {
                     ammount *= -1;
                 }

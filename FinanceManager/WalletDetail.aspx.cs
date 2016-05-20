@@ -43,17 +43,7 @@ namespace FinanceManager
 
             if (!IsPostBack)
             {
-                LoadDdlValues(idWallet);
-                FillAccounts(idWallet);
-            }
-            else
-            {
 
-            }
-
-
-            if (idUser != 0)
-            {
                 var accounts = Database.GetAccountsPerWallet(idWallet);
                 if (accounts.Count == 0)
                 {
@@ -81,19 +71,53 @@ namespace FinanceManager
                     }
                 }
 
+                if (txtFrom.Text == null || txtFrom.Text == "")
+                {
+                    txtFrom.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                }
+                var data = Database.GetTransactionCategories();
+
+                foreach (var item in data)
+                {
+                    cblTransactionCategories.Items.Add(new ListItem
+                    {
+                        Text = item.Name,
+                        Value = item.Id.ToString()
+                    });
+                }
+                FillAccounts(idWallet);
             }
-        }
-
-
-        private void LoadDdlValues(int idWallet)
-        {
-            var data = Database.GetDdlTransactionCategoryValues(idWallet);
-
-            ddlCategory.Items.Clear();
-            ddlCategory.Items.Add(new ListItem { Value = "", Text = "Všetky kategórie." });
-            foreach (var item in data)
+            else
             {
-                ddlCategory.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Name });
+                List<TransactionDetail> filteredTransactions = new List<TransactionDetail>();
+
+                var accounts = Database.GetAccountsPerWallet(idWallet);
+                if (accounts.Count == 0)
+                {
+                    //write somewhere, you have nothing in there.
+                }
+                List<int> idCategories = new List<int>();
+                foreach (ListItem item in cblTransactionCategories.Items)
+                {
+                    if (item.Selected)
+                    {
+                        idCategories.Add(Int32.Parse(item.Value));
+                    }
+                }
+                int year = Int32.Parse(txtFrom.Text.Substring(0, 4));
+                int month = Int32.Parse(txtFrom.Text.Substring(5, 2));
+                int day = Int32.Parse(txtFrom.Text.Substring(8, 2));
+                DateTime from = new DateTime(year, month, day);
+
+                filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from);
+
+                for (int i = 0; i < filteredTransactions.Count; i++)
+                {
+                    filteredTransactions[i].Ammount = filteredTransactions[i].Ammount + " \u20AC";
+                }
+
+                gwTransactionsResults.DataSource = filteredTransactions;
+                gwTransactionsResults.DataBind();
             }
         }
 
@@ -112,7 +136,10 @@ namespace FinanceManager
 
         protected void btnClearCategory_Click(object sender, EventArgs e)
         {
-            ddlCategory.SelectedValue = "";
+            foreach (ListItem item in cblTransactionCategories.Items)
+            {
+                item.Selected = true;
+            }
         }
 
         protected void btnFilter_Click(object sender, EventArgs e)

@@ -14,15 +14,16 @@
             <table>
                 <tr>
                     <td>Typ transakcie:</td>
-                    <td>
-                        <asp:DropDownList runat="server" ID="ddlCategory" AutoPostBack="true" />
+                    <td colspan="2">
+                        <asp:CheckBoxList runat="server" ID="cblTransactionCategories" AutoPostBack="true" RepeatDirection="Horizontal" class="transType">
+                        </asp:CheckBoxList>
                     </td>
                     <td>
                         <asp:Button runat="server" ID="btnClearCategory" Text="Všetky" OnClick="btnClearCategory_Click" />
                     </td>
                 </tr>
                 <tr>
-                    <td>Typ transakcie:</td>
+                    <td>Účet:</td>
                     <td>
                         <asp:DropDownList runat="server" ID="ddlAccounts" AutoPostBack="true" />
                     </td>
@@ -42,32 +43,33 @@
                     </td>
                 </tr>--%>
             </table>
+            <asp:GridView runat="server" ID="gwTransactionsResults" AllowPaging="false" AllowSorting="false" PageSize="40" AutoGenerateColumns="false">
+                <Columns>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.IdTransaction) %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.TransactionCategory) %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.Ammount)%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.CreationDate) %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+            </asp:GridView>
         </ContentTemplate>
     </asp:UpdatePanel>
-    <asp:GridView runat="server" ID="gwTransactionsResults" AllowPaging="false" AllowSorting="false" PageSize="40" AutoGenerateColumns="false">
-        <Columns>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <%# Eval(TableColumns.IdTransaction) %>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <%# Eval(TableColumns.TransactionCategory) %>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <%# Eval(TableColumns.Ammount)%>
-                </ItemTemplate>
-            </asp:TemplateField>
-            <asp:TemplateField>
-                <ItemTemplate>
-                    <%# Eval(TableColumns.CreationDate) %>
-                </ItemTemplate>
-            </asp:TemplateField>
-        </Columns>
-    </asp:GridView>
+
 
 
 </asp:Content>

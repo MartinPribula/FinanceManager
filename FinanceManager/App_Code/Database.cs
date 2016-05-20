@@ -477,5 +477,47 @@ namespace FinanceManager
             return transactionId;
         }
 
+
+        public static List<TransactionDetail> GetFilteredTransactions(int idWallet, List<int> idCategories, DateTime from)
+        {
+            var result = new List<TransactionDetail>();
+            DataTable data = new DataTable();
+            data.Columns.Add("TransactionCategoryId", type: typeof(int));
+            foreach (int item in idCategories)
+            {
+                data.Rows.Add(new Object[] {item});
+            }
+
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_TransPerMonthCategory"))
+                    {
+                        command.Parameters.AddWithValue("@idWallet", idWallet);
+                        command.Parameters.AddWithValue("@fromDate", from);
+                        command.Parameters.AddWithValue("@idCategories", data);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new TransactionDetail
+                                {
+                                    IdTransaction = reader.GetInt32(0),
+                                    TransactionCategory = reader.GetString(1),
+                                    Ammount = ((float)reader.GetDecimal(2)).ToString(),
+                                    CreationDate = reader.GetString(3),
+                                    TransactionType = reader.GetInt32(4)
+                                });
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return result;
+        }
     }
+
+    
 }
