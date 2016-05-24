@@ -19,13 +19,17 @@
                         </asp:CheckBoxList>
                     </td>
                     <td>
-                        <asp:Button runat="server" ID="btnClearCategory" Text="Všetky" OnClick="btnClearCategory_Click" />
+                        <asp:Button runat="server" ID="btnClearCategory" Text="Všetky" Visible="false"  OnClick="btnClearCategory_Click" />
                     </td>
                 </tr>
                 <tr>
                     <td>Účet:</td>
+                    <td colspan="2">
+                        <asp:CheckBoxList runat="server" ID="cblAccounts" AutoPostBack="true" RepeatDirection="Horizontal" class="transType">
+                        </asp:CheckBoxList>
+                    </td>
                     <td>
-                        <asp:DropDownList runat="server" ID="ddlAccounts" AutoPostBack="true" />
+                        <asp:Button runat="server" ID="btnClearAccount" Text="Všetky" Visible="false" OnClick="btnClearAccounts_Click" />
                     </td>
                 </tr>
                 <tr>
@@ -58,6 +62,11 @@
                     <asp:TemplateField>
                         <ItemTemplate>
                             <%# Eval(TableColumns.Ammount)%>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.AccountName) %>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField>

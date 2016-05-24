@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -9,23 +10,26 @@ namespace FinanceManager
 {
     public partial class CreateTransaction : System.Web.UI.Page
     {
-        protected int idWallet;
+        protected int idWallet = 0;
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
             int idUser = 0;
-            idWallet = 0;
-            Int32.TryParse((string)Request.QueryString["id"], out idWallet);
-            idUser = Database.CheckWallet(idWallet);
-            if (Session["idUser"] != null)
+            if (Request.IsAuthenticated)
             {
-                if (idUser != (int)Session["idUser"])
-                {
-                    Response.Redirect("Default.aspx");
-                }
+                HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                idUser = Database.GetUserId(ticket.Name);
             }
             else
+            {
+                Response.Redirect("Default.aspx");
+            }
+
+            Int32.TryParse((string)Request.QueryString["id"], out idWallet);
+            if (idUser != Database.CheckWallet(idWallet))
             {
                 Response.Redirect("Default.aspx");
             }

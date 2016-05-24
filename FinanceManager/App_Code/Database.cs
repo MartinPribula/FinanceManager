@@ -478,14 +478,21 @@ namespace FinanceManager
         }
 
 
-        public static List<TransactionDetail> GetFilteredTransactions(int idWallet, List<int> idCategories, DateTime from)
+        public static List<TransactionDetail> GetFilteredTransactions(int idWallet, List<int> idCategories, DateTime from, DateTime to, List<int> idAccounts)
         {
             var result = new List<TransactionDetail>();
-            DataTable data = new DataTable();
-            data.Columns.Add("TransactionCategoryId", type: typeof(int));
+            DataTable categories = new DataTable();
+            categories.Columns.Add("TransactionCategoryId", type: typeof(int));
             foreach (int item in idCategories)
             {
-                data.Rows.Add(new Object[] {item});
+                categories.Rows.Add(new Object[] {item});
+            }
+
+            DataTable accounts = new DataTable();
+            accounts.Columns.Add("AccountId", type: typeof(int));
+            foreach (int item in idAccounts)
+            {
+                accounts.Rows.Add(new Object[] { item });
             }
 
             using (var transaction = new TransactionScope())
@@ -496,7 +503,9 @@ namespace FinanceManager
                     {
                         command.Parameters.AddWithValue("@idWallet", idWallet);
                         command.Parameters.AddWithValue("@fromDate", from);
-                        command.Parameters.AddWithValue("@idCategories", data);
+                        command.Parameters.AddWithValue("@toDate", to);
+                        command.Parameters.AddWithValue("@idCategories", categories);
+                        command.Parameters.AddWithValue("@idAccounts", accounts);
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
@@ -507,7 +516,8 @@ namespace FinanceManager
                                     TransactionCategory = reader.GetString(1),
                                     Ammount = ((float)reader.GetDecimal(2)).ToString(),
                                     CreationDate = reader.GetString(3),
-                                    TransactionType = reader.GetInt32(4)
+                                    TransactionType = reader.GetInt32(4),
+                                    AccountName = reader.GetString(5)
                                 });
                             }
                         }
@@ -517,6 +527,68 @@ namespace FinanceManager
             }
             return result;
         }
+
+        public static List<TransactionDetail> GetTransactionsForWallet(int idWallet)
+        {
+            var result = new List<TransactionDetail>();
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_GetTransactionsPerWallet"))
+                    {
+                        command.Parameters.AddWithValue("@idWallet", idWallet);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new TransactionDetail
+                                {
+                                    IdTransaction = reader.GetInt32(0),
+                                    TransactionCategory = reader.GetString(1),
+                                    Ammount = ((float)reader.GetDecimal(2)).ToString(),
+                                    CreationDate = reader.GetString(3),
+                                    TransactionType = reader.GetInt32(4),
+                                    AccountName = reader.GetString(5)
+                                });
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return result;
+        }
+
+        public static List<TransactionCategoryIdName> GetTransactionCategoriesForWallet(int idWallet)
+        {
+            var result = new List<TransactionCategoryIdName>();
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_GetTransactionCategoriesForWallet"))
+                    {
+                        command.Parameters.AddWithValue("@idWallet", idWallet);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new TransactionCategoryIdName
+                                {
+                                    Id = reader.GetInt32(0),
+                                    Name = reader.GetString(1)
+                                });
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return result;
+        }
+
+
     }
 
     

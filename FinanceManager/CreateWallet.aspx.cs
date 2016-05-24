@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -10,6 +11,7 @@ namespace FinanceManager
 {
     public partial class CreateWallet : System.Web.UI.Page
     {
+        int idUser = 0;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Request.IsAuthenticated)
@@ -18,6 +20,10 @@ namespace FinanceManager
             }
             else
             {
+                HttpCookie authCookie = Request.Cookies[FormsAuthentication.FormsCookieName];
+                FormsAuthenticationTicket ticket = FormsAuthentication.Decrypt(authCookie.Value);
+                idUser = Database.GetUserId(ticket.Name);
+
                 // posible to have euro sign i textbox
             }
 
@@ -100,7 +106,7 @@ namespace FinanceManager
                     }
                 }
 
-                int idWallet = Database.CreateWallet((int) Session["idUser"], tbWalletName.Text, cbAccountBank.Checked,
+                int idWallet = Database.CreateWallet(idUser, tbWalletName.Text, cbAccountBank.Checked,
                     cbAccountCash.Checked, tbBankAccountName.Text, tbCashAccountName.Text,
                     float.Parse(tbBankBalance.Text), float.Parse(tbCashBalance.Text), categoryIds);
 

@@ -11,4 +11,5 @@ public class TransactionDetail
     public string Ammount { get; set; }
     public string CreationDate { get; set; }
     public int TransactionType { get; set; }
+    public string AccountName { get; set; }
 }

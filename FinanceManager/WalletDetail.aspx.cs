@@ -19,6 +19,7 @@ namespace FinanceManager
             public const string Ammount = "Ammount";
             public const string CreationDate = "CreationDate";
             public const string TransactionType = "TransactionType";
+            public const string AccountName = "AccountName";
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -41,6 +42,9 @@ namespace FinanceManager
                 Response.Redirect("Default.aspx");
             }
 
+            ScriptManager.GetCurrent(this).RegisterPostBackControl(btnClearAccount);
+            ScriptManager.GetCurrent(this).RegisterPostBackControl(btnClearCategory);
+
             if (!IsPostBack)
             {
 
@@ -52,10 +56,11 @@ namespace FinanceManager
                 else
                 {
                     List<TransactionDetail> transactions = new List<TransactionDetail>();
-                    foreach (var account in accounts)
-                    {
-                        transactions.AddRange(Database.GetTransactionsForAccount(account.IdAccount));
-                    }
+                    transactions = Database.GetTransactionsForWallet(idWallet);
+                    //foreach (var account in accounts)
+                    //{
+                    //    transactions.AddRange(Database.GetTransactionsForAccount(account.IdAccount));
+                    //}
                     if (transactions.Count == 0)
                     {
                         //write you have 0 trans.
@@ -75,7 +80,12 @@ namespace FinanceManager
                 {
                     txtFrom.Text = DateTime.Today.ToString("yyyy-MM-dd");
                 }
-                var data = Database.GetTransactionCategories();
+
+                if (txtTo.Text == null || txtTo.Text == "")
+                {
+                    txtTo.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                }
+                var data = Database.GetTransactionCategoriesForWallet(idWallet);
 
                 foreach (var item in data)
                 {
@@ -104,12 +114,27 @@ namespace FinanceManager
                         idCategories.Add(Int32.Parse(item.Value));
                     }
                 }
+
+                List<int> idAccounts = new List<int>();
+                foreach (ListItem item in cblAccounts.Items)
+                {
+                    if (item.Selected)
+                    {
+                        idAccounts.Add(Int32.Parse(item.Value));
+                    }
+                }
+
                 int year = Int32.Parse(txtFrom.Text.Substring(0, 4));
                 int month = Int32.Parse(txtFrom.Text.Substring(5, 2));
                 int day = Int32.Parse(txtFrom.Text.Substring(8, 2));
                 DateTime from = new DateTime(year, month, day);
 
-                filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from);
+                year = Int32.Parse(txtTo.Text.Substring(0, 4));
+                month = Int32.Parse(txtTo.Text.Substring(5, 2));
+                day = Int32.Parse(txtTo.Text.Substring(8, 2));
+                DateTime to = new DateTime(year, month, day);
+
+                filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from, to, idAccounts);
 
                 for (int i = 0; i < filteredTransactions.Count; i++)
                 {
@@ -124,11 +149,13 @@ namespace FinanceManager
         private void FillAccounts(int idWallet)
         {
             var data = Database.GetAccountsPerWallet(idWallet);
-            ddlAccounts.Items.Clear();
-            ddlAccounts.Items.Add(new ListItem { Value = "", Text = "Všetky" });
             foreach (var item in data)
             {
-                ddlAccounts.Items.Add(new ListItem { Value = item.IdAccount.ToString(), Text = item.Name });
+                cblAccounts.Items.Add(new ListItem
+                {
+                    Text = item.Name,
+                    Value = item.IdAccount.ToString()
+                });
             }
         }
 
@@ -137,6 +164,14 @@ namespace FinanceManager
         protected void btnClearCategory_Click(object sender, EventArgs e)
         {
             foreach (ListItem item in cblTransactionCategories.Items)
+            {
+                item.Selected = true;
+            }
+        }
+
+        protected void btnClearAccounts_Click(object sender, EventArgs e)
+        {
+            foreach (ListItem item in cblAccounts.Items)
             {
                 item.Selected = true;
             }

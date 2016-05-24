@@ -40,13 +40,22 @@ namespace FinanceManager {
         protected global::System.Web.UI.WebControls.Button btnClearCategory;
         
         /// <summary>
-        /// ddlAccounts control.
+        /// cblAccounts control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAccounts;
+        protected global::System.Web.UI.WebControls.CheckBoxList cblAccounts;
+        
+        /// <summary>
+        /// btnClearAccount control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClearAccount;
         
         /// <summary>
         /// txtFrom control.
