@@ -11,6 +11,15 @@
             <p>
                 <a href="CreateTransaction.aspx?id=<%=idWallet%>">Pridať transakciu.</a>
             </p>
+
+            <div>
+                <canvas id="cvOverallMoney" width="250" height="100"></canvas>
+                <br />
+                <asp:Image ID="imgASP" runat="server" />
+                <asp:Button ID="btnSave" runat="server" Text="Save Image"></asp:Button>
+            </div>
+
+
             <table>
                 <tr>
                     <td>Typ transakcie:</td>
@@ -19,7 +28,7 @@
                         </asp:CheckBoxList>
                     </td>
                     <td>
-                        <asp:Button runat="server" ID="btnClearCategory" Text="Všetky" Visible="false"  OnClick="btnClearCategory_Click" />
+                        <asp:Button runat="server" ID="btnClearCategory" Text="Všetky" Visible="false" OnClick="btnClearCategory_Click" />
                     </td>
                 </tr>
                 <tr>
@@ -47,7 +56,7 @@
                     </td>
                 </tr>--%>
             </table>
-            <asp:GridView runat="server" ID="gwTransactionsResults" AllowPaging="false" AllowSorting="false" PageSize="40" AutoGenerateColumns="false">
+            <asp:GridView runat="server" ID="gwTransactionsResults" AllowPaging="false" AllowSorting="false" PageSize="150" AutoGenerateColumns="false">
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>

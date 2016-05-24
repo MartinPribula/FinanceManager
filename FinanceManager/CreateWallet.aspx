@@ -21,7 +21,7 @@
                     <li>
                         <asp:Label ID="lbWalletName" runat="server" AssociatedControlID="tbWalletName">Meno peňaženky:</asp:Label>
                         <asp:TextBox ID="tbWalletName" runat="server" />
-                        <%--<asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />--%>
+                        <asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />
                     </li>
                     <li>
                         <asp:Label ID="lbCategories" runat="server" AssociatedControlID="cblTransactionCategories">Kategórie treansakcií v peňaženke:</asp:Label>
