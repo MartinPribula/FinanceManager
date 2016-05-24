@@ -21,11 +21,18 @@
                     <li>
                         <asp:Label ID="lbWalletName" runat="server" AssociatedControlID="tbWalletName">Meno peňaženky:</asp:Label>
                         <asp:TextBox ID="tbWalletName" runat="server" />
-                        <asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />
+                        <%--<asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />--%>
                     </li>
                     <li>
+                        <asp:Label ID="lbCategories" runat="server" AssociatedControlID="cblTransactionCategories">Kategórie treansakcií v peňaženke:</asp:Label>
                         <asp:CheckBoxList runat="server" ID="cblTransactionCategories" AutoPostBack="true" RepeatDirection="Horizontal" class="transType">
                         </asp:CheckBoxList>
+                    </li>
+                    <li>
+                        <asp:Label ID="lbNewCategory" runat="server" AssociatedControlID="tbNewCategory">Pridajte vlastnú kategóriu:</asp:Label>
+                        <asp:TextBox ID="tbNewCategory" runat="server" />
+                        <asp:Button runat="server" ID="btNewCategory" Text="Pridaj!" OnClick="btnNewCategory_Click" />
+                        <asp:CustomValidator runat="server" ID="cvNewCategory" ControlToValidate="tbNewCategory" OnServerValidate="ValidateCategory" CssClass="field-validation-error" ErrorMessage="Kategória už existuje!" />
                     </li>
                     <span class="float-left-fieldset">
                         <fieldset>

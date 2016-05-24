@@ -49,13 +49,13 @@ namespace FinanceManager {
         protected global::System.Web.UI.WebControls.TextBox tbWalletName;
         
         /// <summary>
-        /// rfvWalletName control.
+        /// lbCategories control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvWalletName;
+        protected global::System.Web.UI.WebControls.Label lbCategories;
         
         /// <summary>
         /// cblTransactionCategories control.
@@ -65,6 +65,42 @@ namespace FinanceManager {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBoxList cblTransactionCategories;
+        
+        /// <summary>
+        /// lbNewCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbNewCategory;
+        
+        /// <summary>
+        /// tbNewCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbNewCategory;
+        
+        /// <summary>
+        /// btNewCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btNewCategory;
+        
+        /// <summary>
+        /// cvNewCategory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CustomValidator cvNewCategory;
         
         /// <summary>
         /// cbAccountCash control.

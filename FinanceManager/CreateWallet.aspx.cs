@@ -126,5 +126,39 @@ namespace FinanceManager
             
 
         }
+
+        protected void btnNewCategory_Click(object sender, EventArgs e)
+        {
+            if (cvNewCategory.IsValid)
+            {
+
+                int idCategory = Database.CreateCategory(tbNewCategory.Text);
+
+                if (idCategory != 0)
+                {
+                    cblTransactionCategories.Items.Add(new ListItem
+                    {
+                        Text = tbNewCategory.Text,
+                        Value = idCategory.ToString()
+                    });
+                }
+            }
+
+        }
+
+        protected void ValidateCategory(object senter, ServerValidateEventArgs args)
+        {
+            int idCategory = Database.CheckCategory(tbNewCategory.Text);
+            if (idCategory == 0)
+            {
+                args.IsValid = true;
+            }
+            else
+            {
+                args.IsValid = false;
+            }
+
+        }
+
     }
 }

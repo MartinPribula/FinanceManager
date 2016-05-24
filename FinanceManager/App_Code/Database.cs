@@ -588,6 +588,54 @@ namespace FinanceManager
             return result;
         }
 
+        public static int CreateCategory(string Name)
+        {
+            int idCategory = 0;
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_CreateCategory"))
+                    {
+                        command.Parameters.AddWithValue("@CategoryName", Name);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                idCategory = reader.GetInt32(0);
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return idCategory;
+        }
+
+        public static int CheckCategory(string Name)
+        {
+            int idCategory = 0;
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_CheckCategory"))
+                    {
+                        command.Parameters.AddWithValue("@CategoryName", Name);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                idCategory = reader.GetInt32(0);
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return idCategory;
+        }
+
 
     }
 
