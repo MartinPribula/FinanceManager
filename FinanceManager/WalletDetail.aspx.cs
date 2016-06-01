@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -20,6 +21,25 @@ namespace FinanceManager
             public const string CreationDate = "CreationDate";
             public const string TransactionType = "TransactionType";
             public const string AccountName = "AccountName";
+        }
+
+        protected dynamic GetTransactionsDistribution(List<TransactionDetail> transactions)
+        {
+            var  transactionDistribution = from x in transactions
+                                          where x.TransactionType == -1 
+                                          group x by x.TransactionCategory into g
+                                          select new { Category = (string) g.Key, Value = g.Sum(x => (int) (float.Parse(x.Ammount.Substring(1)))) };
+
+            return transactionDistribution;
+        }
+
+        protected void GetBallanceProgress(List<TransactionDetail> transactions, float Ballance, DateTime from, DateTime To)
+        {
+            transactions = transactions.OrderByDescending(x => x.CreationDate).ToList();
+            foreach (var trans in transactions)
+            {
+
+            }
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -67,12 +87,17 @@ namespace FinanceManager
                     }
                     else
                     {
+                        var trans = new { categoryCount = GetTransactionsDistribution(transactions) };
+                        string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
+                        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TRANS", smth, true);
+                        //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                         for (int i = 0; i < transactions.Count; i++)
                         {
                             transactions[i].Ammount = transactions[i].Ammount + " \u20AC";
                         }
                         gwTransactionsResults.DataSource = transactions;
                         gwTransactionsResults.DataBind();
+                        
                     }
                 }
 
@@ -96,6 +121,7 @@ namespace FinanceManager
                     });
                 }
                 FillAccounts(idWallet);
+                
             }
             else
             {
@@ -135,7 +161,11 @@ namespace FinanceManager
                 DateTime to = new DateTime(year, month, day);
 
                 filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from, to, idAccounts);
+                //var trans = new { categoryCount = GetTransactionsDistribution(filteredTransactions) };
+                //string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
+                //ScriptManager.RegisterStartupScript(Page, this.GetType(), "TRANS", smth, true);
 
+                //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                 for (int i = 0; i < filteredTransactions.Count; i++)
                 {
                     filteredTransactions[i].Ammount = filteredTransactions[i].Ammount + " \u20AC";
@@ -143,7 +173,10 @@ namespace FinanceManager
 
                 gwTransactionsResults.DataSource = filteredTransactions;
                 gwTransactionsResults.DataBind();
+                GetTransactionsDistribution(filteredTransactions);
             }
+
+            
         }
 
         private void FillAccounts(int idWallet)

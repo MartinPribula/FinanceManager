@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-
+[Serializable]
 public class TransactionDetail
 {
     public int IdTransaction { get; set; }
