@@ -103,6 +103,24 @@ namespace FinanceManager {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvType;
         
         /// <summary>
+        /// lbAtmCash control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lbAtmCash;
+        
+        /// <summary>
+        /// ddlAtmCash control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlAtmCash;
+        
+        /// <summary>
         /// tbDescription control.
         /// </summary>
         /// <remarks>

@@ -21,7 +21,7 @@
                     <li>
                         <asp:Label ID="lbWalletName" runat="server" AssociatedControlID="tbWalletName">Meno peňaženky:</asp:Label>
                         <asp:TextBox ID="tbWalletName" runat="server" />
-                        <asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />
+                        <%--<asp:RequiredFieldValidator runat="server" ID="rfvWalletName" ControlToValidate="tbWalletName" CssClass="field-validation-error" ErrorMessage="Vyplňte meno peňaženky!" />--%>
                     </li>
                     <li>
                         <asp:Label ID="lbCategories" runat="server" AssociatedControlID="cblTransactionCategories">Kategórie treansakcií v peňaženke:</asp:Label>
@@ -34,38 +34,41 @@
                         <asp:Button runat="server" ID="btNewCategory" Text="Pridaj!" OnClick="btnNewCategory_Click" />
                         <asp:CustomValidator runat="server" ID="cvNewCategory" ControlToValidate="tbNewCategory" OnServerValidate="ValidateCategory" CssClass="field-validation-error" ErrorMessage="Kategória už existuje!" />
                     </li>
-                    <span class="float-left-fieldset">
-                        <fieldset>
-                            <legend>Hotovosť</legend>
-                            <li>
-                                <asp:CheckBox ID="cbAccountCash" runat="server" AutoPostBack="True" OnCheckedChanged="cbAccountCash_checked" Text="Chcem vytvoriť účet pre hotovosť." Checked="true" TextAlign="Left" CssClass="check-box-special" />
-                            </li>
-                            <li>
-                                <asp:Label ID="lbCashAccountName" runat="server" AssociatedControlID="tbCashAccountName">Názov účtu pre hotovosť:</asp:Label>
-                                <asp:TextBox ID="tbCashAccountName" runat="server" Text="Hotovosť" />
-                            </li>
-                            <li>
-                                <asp:Label ID="lbCashBalance" runat="server" AssociatedControlID="tbCashBalance">V hotovosti mám:</asp:Label>
-                                <asp:TextBox ID="tbCashBalance" runat="server" Text="0" />
-                            </li>
-                        </fieldset>
-                    </span>
-                    <span class="float-right-fieldset">
-                        <fieldset>
-                            <legend>Bankový účet</legend>
-                            <li>
-                                <asp:CheckBox ID="cbAccountBank" runat="server" AutoPostBack="True" OnCheckedChanged="cbAccountBank_checked" Text="Chcem vytvoriť bankový účet." Checked="true" TextAlign="Left" CssClass="check-box-special" />
-                            </li>
-                            <li>
-                                <asp:Label ID="lbBankAccountName" runat="server" AssociatedControlID="tbBankAccountName">Názov bankového účtu:</asp:Label>
-                                <asp:TextBox ID="tbBankAccountName" runat="server" Text="Bankový účet" />
-                            </li>
-                            <li>
-                                <asp:Label ID="lbBankBalance" runat="server" AssociatedControlID="tbBankBalance" AutoPostBack="True">Na účte mám:</asp:Label>
-                                <asp:TextBox ID="tbBankBalance" runat="server" Text="0" />
-                            </li>
-                        </fieldset>
-                    </span>
+                    <div id ="divAccounts">
+                        <span class="float-left-fieldset">
+                            <fieldset>
+                                <legend>Hotovosť</legend>
+                                <li>
+                                    <asp:CheckBox ID="cbAccountCash" runat="server" AutoPostBack="True" OnCheckedChanged="cbAccountCash_checked" Text="Chcem vytvoriť účet pre hotovosť." Checked="true" TextAlign="Left" CssClass="check-box-special" />
+                                </li>
+                                <li>
+                                    <asp:Label ID="lbCashAccountName" runat="server" AssociatedControlID="tbCashAccountName">Názov účtu pre hotovosť:</asp:Label>
+                                    <asp:TextBox ID="tbCashAccountName" runat="server" Text="Hotovosť" />
+                                </li>
+                                <li>
+                                    <asp:Label ID="lbCashBalance" runat="server" AssociatedControlID="tbCashBalance">V hotovosti mám:</asp:Label>
+                                    <asp:TextBox ID="tbCashBalance" runat="server" Text="0" />
+                                </li>
+                            </fieldset>
+                        </span>
+                        <span class="float-right-fieldset">
+                            <fieldset>
+                                <legend>Bankový účet</legend>
+                                <li>
+                                    <asp:CheckBox ID="cbAccountBank" runat="server" AutoPostBack="True" OnCheckedChanged="cbAccountBank_checked" Text="Chcem vytvoriť bankový účet." Checked="true" TextAlign="Left" CssClass="check-box-special" />
+                                </li>
+                                <li>
+                                    <asp:Label ID="lbBankAccountName" runat="server" AssociatedControlID="tbBankAccountName">Názov bankového účtu:</asp:Label>
+                                    <asp:TextBox ID="tbBankAccountName" runat="server" Text="Bankový účet" />
+                                </li>
+                                <li>
+                                    <asp:Label ID="lbBankBalance" runat="server" AssociatedControlID="tbBankBalance" AutoPostBack="True">Na účte mám:</asp:Label>
+                                    <asp:TextBox ID="tbBankBalance" runat="server" Text="0" TextMode="Number" />
+                                </li>
+                            </fieldset>
+                        </span>
+                    </div>
+
                     <li>
                         <asp:Button runat="server" ID="btCreateWallet" Text="Vytvor!" OnClick="btnCreateWallet_Click" CssClass="float-left" />
                     </li>

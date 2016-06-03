@@ -45,6 +45,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        <asp:Label ID="lbAtmCash" runat="server" Visible="false" Text="Pripísať k hotovosti:"/>
+                    </td>
+                    <td>
+                        <asp:DropDownList runat="server" ID="ddlAtmCash" AutoPostBack="true" Width="150px" Visible="false" />
+                    </td>
+                </tr>
+                <tr>
                     <td>Popis:</td>
                     <td colspan="3">
                         <asp:TextBox runat="server" ID="tbDescription" AutoPostBack="false" TextMode="MultiLine" Rows="4" />

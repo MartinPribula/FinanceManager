@@ -9,9 +9,11 @@ using System.Web.UI.WebControls;
 
 namespace FinanceManager
 {
+
     public partial class CreateWallet : System.Web.UI.Page
     {
         int idUser = 0;
+        private int accountNumber = 1;
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Request.IsAuthenticated)
@@ -112,7 +114,7 @@ namespace FinanceManager
 
                 if (idWallet != 0)
                 {
-
+                    Response.Redirect("WalletDetail.aspx?id=" + idWallet);
                 }
                 else
                 {
@@ -158,6 +160,30 @@ namespace FinanceManager
                 args.IsValid = false;
             }
 
+        }
+
+        protected void btnAddAccount_Click(object sender, EventArgs e)
+        {
+            Label lbAdditionalAccountName = new Label();
+            lbAdditionalAccountName.ID = "lbAdditionalAccountName" + accountNumber;
+            lbAdditionalAccountName.Text = "Názov nového účtu:";
+            lbAdditionalAccountName.AssociatedControlID = "tbNewAccountName" + accountNumber;
+            Controls.Add(lbAdditionalAccountName);
+
+            TextBox tbAdditionalAccountName = new TextBox();
+            tbAdditionalAccountName.ID = "tbNewAccountName" + accountNumber;
+            Controls.Add(tbAdditionalAccountName);
+
+            Label lbAdditionalAccountBalance = new Label();
+            lbAdditionalAccountBalance.ID = "lbAdditionalAccountBalance" + accountNumber;
+            lbAdditionalAccountBalance.Text = "Na účte mám:";
+            lbAdditionalAccountBalance.AssociatedControlID = "tbNewAccountName" + accountNumber;
+            Controls.Add(lbAdditionalAccountBalance);
+
+            TextBox tbAdditionalAccountBalance = new TextBox();
+            tbAdditionalAccountBalance.ID = "tbNewAccountName" + accountNumber;
+            tbAdditionalAccountBalance.TextMode = TextBoxMode.Number;
+            Controls.Add(tbAdditionalAccountBalance);
         }
 
     }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.Linq;
 using System.Web;
 using System.Web.Script.Serialization;
@@ -33,13 +34,52 @@ namespace FinanceManager
             return transactionDistribution;
         }
 
-        protected void GetBallanceProgress(List<TransactionDetail> transactions, float Ballance, DateTime from, DateTime To)
+        protected List<float> GetBallanceProgress(List<TransactionDetail> transactions, float Ballance)
         {
-            transactions = transactions.OrderByDescending(x => x.CreationDate).ToList();
-            foreach (var trans in transactions)
+            DateTime now = DateTime.Now;
+            string nowStr = now.ToString("dd/MM/yyyy");
+            int year = Int32.Parse(nowStr.Substring(6, 4));
+            int month = Int32.Parse(nowStr.Substring(3, 2)) - 1;
+            int day = Int32.Parse(nowStr.Substring(0, 2));
+            DateTime first = new DateTime(year, month, 1);
+            int[] longMonths = {1, 3, 5, 7, 8, 10, 12};
+            DateTime last;
+            if(longMonths.Contains(month))
             {
-
+                last = new DateTime(year, month, 31);
             }
+            else if (month == 2 && year % 4 != 0)
+            {
+                last = new DateTime(year, month, 28);
+            }
+            else if (month == 2 && year % 4 == 0)
+            {
+                last = new DateTime(year, month, 29);
+            }
+            else
+            {
+                last = new DateTime(year, month, 30);
+            }
+
+            List<float> values = new List<float>();
+
+            values.Add(Ballance);
+            int i = -1;
+            while (DateTime.Now.AddDays(i) >= first)
+            {
+                var trans = transactions.Where(x => x.CreationDate == DateTime.Now.AddDays(i).ToString("dd/MM/yyyy")).ToList();
+                float dayAmount = 0;
+                foreach (var tran in trans){
+                    dayAmount += float.Parse(tran.Ammount);
+                }
+                Ballance += - dayAmount;
+                values.Add(Ballance);
+                i--; 
+            }
+            values.Reverse();
+            values = values.Take(last.Day).ToList();
+
+            return values;
         }
 
         protected void Page_Load(object sender, EventArgs e)
@@ -87,9 +127,17 @@ namespace FinanceManager
                     }
                     else
                     {
-                        var trans = new { categoryCount = GetTransactionsDistribution(transactions) };
-                        string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
-                        ScriptManager.RegisterStartupScript(Page, this.GetType(), "TRANS", smth, true);
+                        var transPie = new { categoryCount = GetTransactionsDistribution(transactions) };
+                        string jsonPie = "var categoryCounts = " + new JavaScriptSerializer().Serialize(transPie) + ";";
+                        ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "tranCount", jsonPie, true);
+                        ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "scriptPie", "<script src=\"Scripts/MyScripts/PieChartCategories.js\" type=\"text/javascript\"></script>", false);
+
+                        var transLine = new { balProg = GetBallanceProgress(transactions, float.Parse("1392.8200")) };
+                        string jsonLine = "var balanceProgress = " + new JavaScriptSerializer().Serialize(transLine) + ";";
+                        ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "balProg", jsonLine, true);
+                        ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "scriptLine", "<script src=\"Scripts/MyScripts/LineGraphBalance.js\" type=\"text/javascript\"></script>", false);
+
+                        
                         //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                         for (int i = 0; i < transactions.Count; i++)
                         {
@@ -161,9 +209,10 @@ namespace FinanceManager
                 DateTime to = new DateTime(year, month, day);
 
                 filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from, to, idAccounts);
-                //var trans = new { categoryCount = GetTransactionsDistribution(filteredTransactions) };
-                //string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
-                //ScriptManager.RegisterStartupScript(Page, this.GetType(), "TRANS", smth, true);
+                var trans = new { categoryCount = GetTransactionsDistribution(filteredTransactions) };
+                string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
+                //ScriptManager sm = ScriptManager.GetCurrent(this);
+                //ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "uniqueId" + Guid.NewGuid(), "<script src=\"Scripts/MyScripts/PieChartCategories.js\" type=\"text/javascript\"></script>", false);
 
                 //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                 for (int i = 0; i < filteredTransactions.Count; i++)

@@ -58,6 +58,29 @@ namespace FinanceManager
                         }
                     }
                 }
+                if (ddlCategory.SelectedValue == "13")
+                {
+                    foreach (ListItem item in rblTransactionType.Items)
+                    {
+                        if (item.Value == "outgoing")
+                        {
+                            item.Selected = true;
+                            rblTransactionType.Enabled = false;
+                            lbAtmCash.Visible = true;
+                            if (ddlAtmCash.SelectedItem == null)
+                            {
+                                fillCashAccounts();
+                            }
+                            ddlAtmCash.Visible = true;
+                        }
+                    }
+                }
+                else
+                {
+                    rblTransactionType.Enabled = true;
+                    ddlAtmCash.Visible = false;
+                    lbAtmCash.Visible = false;
+                }
 
             }
 
@@ -89,6 +112,17 @@ namespace FinanceManager
             foreach (var item in data)
             {
                 ddlCategory.Items.Add(new ListItem { Value = item.Id.ToString(), Text = item.Name });
+            }
+        }
+
+        private void fillCashAccounts()
+        {
+            var data = Database.GetCashAccountsPerWallet(idWallet);
+            ddlAtmCash.Items.Clear();
+            ddlAtmCash.Items.Add(new ListItem { Value = "", Text = "Nešpecifikované" });
+            foreach (var item in data)
+            {
+                ddlAtmCash.Items.Add(new ListItem { Value = item.IdAccount.ToString(), Text = item.Name });
             }
         }
 
@@ -137,6 +171,11 @@ namespace FinanceManager
             }
 
             int idTransaction = Database.CreateTransaction(idWallet, Int32.Parse(ddlAccount.SelectedValue), Int32.Parse(ddlCategory.SelectedValue), ammount, tbDescription.Text, txtCreateDate.Text, transactionType);
+
+            if (ddlCategory.SelectedValue == "13")
+            {
+                int idTransactionCash = Database.CreateTransaction(idWallet, Int32.Parse(ddlAtmCash.SelectedValue), Int32.Parse(ddlCategory.SelectedValue), ammount * (-1), tbDescription.Text, txtCreateDate.Text, transactionType * (-1));
+            }
 
             Response.Redirect("/WalletDetail.aspx?id=" + idWallet);
 

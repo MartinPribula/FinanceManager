@@ -637,6 +637,38 @@ namespace FinanceManager
         }
 
 
+        public static List<AccountDetail> GetCashAccountsPerWallet(int idWallet)
+        {
+            var result = new List<AccountDetail>();
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_GetCashAccountsPerWallet"))
+                    {
+                        command.Parameters.AddWithValue("@idWallet", idWallet);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new AccountDetail
+                                {
+                                    IdAccount = reader.GetInt32(0),
+                                    Name = reader.GetString(1),
+                                    Balance = (float)reader.GetDecimal(2),
+                                    LastUpdate = reader.GetDateTime(3),
+                                    AccountType = reader.GetString(4)
+                                });
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return result;
+        }
+
+
     }
 
     
