@@ -76,27 +76,27 @@
             </table>
             <asp:GridView runat="server" ID="gwTransactionsResults" AllowPaging="false" AllowSorting="false" PageSize="150" AutoGenerateColumns="false">
                 <Columns>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Kategória">
                         <ItemTemplate>
                             <%# Eval(TableColumns.TransactionCategory) %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Suma">
                         <ItemTemplate>
                             <%# Eval(TableColumns.Ammount)%>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Účet">
                         <ItemTemplate>
                             <%# Eval(TableColumns.AccountName) %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Dátum">
                         <ItemTemplate>
                             <%# Eval(TableColumns.CreationDate) %>
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField>
+                    <asp:TemplateField HeaderText="Popis">
                         <ItemTemplate>
                             <%# Eval(TableColumns.Description) %>
                         </ItemTemplate>
