@@ -549,7 +549,8 @@ namespace FinanceManager
                                     Ammount = ((float)reader.GetDecimal(2)).ToString(),
                                     CreationDate = reader.GetString(3),
                                     TransactionType = reader.GetInt32(4),
-                                    AccountName = reader.GetString(5)
+                                    AccountName = reader.GetString(5),
+                                    Description = reader.GetString(6)
                                 });
                             }
                         }
@@ -612,9 +613,10 @@ namespace FinanceManager
             return idCategory;
         }
 
-        public static int CheckCategory(string Name)
+        public static Tuple<int, int> CheckCategory(string Name)
         {
             int idCategory = 0;
+            int isDefault = -1;
             using (var transaction = new TransactionScope())
             {
                 using (var connection = CreateConnection())
@@ -627,13 +629,14 @@ namespace FinanceManager
                             if (reader.Read())
                             {
                                 idCategory = reader.GetInt32(0);
+                                isDefault = reader.GetInt32(1);
                             }
                         }
                     }
                 }
                 transaction.Complete();
             }
-            return idCategory;
+            return new Tuple<int,int>(idCategory, isDefault);
         }
 
 
@@ -658,6 +661,37 @@ namespace FinanceManager
                                     Balance = (float)reader.GetDecimal(2),
                                     LastUpdate = reader.GetDateTime(3),
                                     AccountType = reader.GetString(4)
+                                });
+                            }
+                        }
+                    }
+                }
+                transaction.Complete();
+            }
+            return result;
+        }
+
+        public static List<TransactionNumeric> GetTransactionsInInterval(int idWallet, DateTime from, DateTime to)
+        {
+            var result = new List<TransactionNumeric>();
+            using (var transaction = new TransactionScope())
+            {
+                using (var connection = CreateConnection())
+                {
+                    using (var command = CreateCommand(connection, "sp_GetTransactionsInInterval"))
+                    {
+                        command.Parameters.AddWithValue("@idWallet", idWallet);
+                        command.Parameters.AddWithValue("@from", from);
+                        command.Parameters.AddWithValue("@to", to);
+                        using (var reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                result.Add(new TransactionNumeric
+                                {
+                                    IdTransaction = reader.GetInt32(0),
+                                    Ammount = (float) reader.GetDecimal(1),
+                                    TransactionType = reader.GetInt32(2)
                                 });
                             }
                         }

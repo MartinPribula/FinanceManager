@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Security;
 using System.Web.UI;
+using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 
 namespace FinanceManager
@@ -133,25 +134,46 @@ namespace FinanceManager
         {
             if (cvNewCategory.IsValid)
             {
+                Tuple<int, int> result = Database.CheckCategory(tbNewCategory.Text);
 
-                int idCategory = Database.CreateCategory(tbNewCategory.Text);
-
-                if (idCategory != 0)
+                if (result.Item1 == 0)
                 {
-                    cblTransactionCategories.Items.Add(new ListItem
+                    int idCategory = Database.CreateCategory(tbNewCategory.Text);
+
+                    if (idCategory != 0)
+                    {
+                        cblTransactionCategories.Items.Add(new ListItem
+                        {
+                            Text = tbNewCategory.Text,
+                            Value = idCategory.ToString()
+                        });
+                    }
+                }
+                else
+                {
+                    if (!cblTransactionCategories.Items.Contains(new ListItem
                     {
                         Text = tbNewCategory.Text,
-                        Value = idCategory.ToString()
-                    });
+                        Value = result.Item1.ToString()
+                    }))
+                    {
+                        cblTransactionCategories.Items.Add(new ListItem
+                        {
+                            Text = tbNewCategory.Text,
+                            Value = result.Item1.ToString()
+                        });
+                    }
                 }
+
+                
             }
 
         }
 
         protected void ValidateCategory(object senter, ServerValidateEventArgs args)
         {
-            int idCategory = Database.CheckCategory(tbNewCategory.Text);
-            if (idCategory == 0)
+            Tuple<int, int> result = Database.CheckCategory(tbNewCategory.Text);
+            if (result.Item1 == 0 || result.Item2 == 0)
             {
                 args.IsValid = true;
             }
@@ -164,26 +186,32 @@ namespace FinanceManager
 
         protected void btnAddAccount_Click(object sender, EventArgs e)
         {
+
+            var span = new HtmlGenericControl("span");
+            span.Attributes["class"] = "float-left-fieldset";
+            plAccounts.Controls.Add(span);
+
             Label lbAdditionalAccountName = new Label();
             lbAdditionalAccountName.ID = "lbAdditionalAccountName" + accountNumber;
             lbAdditionalAccountName.Text = "Názov nového účtu:";
             lbAdditionalAccountName.AssociatedControlID = "tbNewAccountName" + accountNumber;
-            Controls.Add(lbAdditionalAccountName);
+            plAccounts.Controls.Add(lbAdditionalAccountName);
+                
 
             TextBox tbAdditionalAccountName = new TextBox();
             tbAdditionalAccountName.ID = "tbNewAccountName" + accountNumber;
-            Controls.Add(tbAdditionalAccountName);
+            plAccounts.Controls.Add(tbAdditionalAccountName);
 
             Label lbAdditionalAccountBalance = new Label();
             lbAdditionalAccountBalance.ID = "lbAdditionalAccountBalance" + accountNumber;
             lbAdditionalAccountBalance.Text = "Na účte mám:";
             lbAdditionalAccountBalance.AssociatedControlID = "tbNewAccountName" + accountNumber;
-            Controls.Add(lbAdditionalAccountBalance);
+            plAccounts.Controls.Add(lbAdditionalAccountBalance);
 
             TextBox tbAdditionalAccountBalance = new TextBox();
             tbAdditionalAccountBalance.ID = "tbNewAccountName" + accountNumber;
             tbAdditionalAccountBalance.TextMode = TextBoxMode.Number;
-            Controls.Add(tbAdditionalAccountBalance);
+            plAccounts.Controls.Add(tbAdditionalAccountBalance);
         }
 
     }

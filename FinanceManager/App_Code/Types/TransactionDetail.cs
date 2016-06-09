@@ -12,4 +12,5 @@ public class TransactionDetail
     public string CreationDate { get; set; }
     public int TransactionType { get; set; }
     public string AccountName { get; set; }
+    public string Description { get; set; }
 }

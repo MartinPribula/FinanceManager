@@ -23,16 +23,21 @@
                 <h1><%: Title %>.</h1>
                 <h2>Tu vidíte stav vašej peňaženky a jednotlivé účty.</h2>
             </hgroup>
+            <p style="font-size: 1.35em;">
+                Aktuálny stav vo vašej peňaženke je: <%=balance%> &euro; <br>
+                Za posledný mesiac ste utratili: <%=spendings%> &euro; <br>
+                Za posledný mesiac ste prijali: <%=gains%> &euro; <br>
+            </p>
             <p>
-                <a href="CreateTransaction.aspx?id=<%=idWallet%>">Pridať transakciu.</a>
+                <a href="CreateTransaction.aspx?id=<%=idWallet%>">Pridať novú transakciu.</a>
             </p>
 
             <asp:Panel ID="ContentPanel" runat="server">
                 <%--<script src="Scripts/MyScripts/PieChartCategories.js" type="text/javascript"></script>--%>
-                <div id="chartBalanceProgress" style="margin-top: 20px; margin-left: 20px; width: 650px; height: 350px; float: left"></div>
-                <div id="chartCategoryDistribution" style="margin-top: 20px; margin-left: 20px; width: 400px; height: 400px; margin-right: 10px; float: right"></div>
+                <div id="chartBalanceProgress" style="margin-top: 20px; margin-left: 20px; width: 61%; height: 350px; float: left; font-size: 0.8em"></div>
+                <div id="chartCategoryDistribution" style="margin-top: 20px; margin-left: 20px; width: 32%; height: 350px; margin-right: 10px; float: right; font-size: 0.8em"></div>
             </asp:Panel>
-
+            <h3 style="margin-top: 0.5em;">Zoznam transakcií</h3>
             <table>
                 <tr>
                     <td>Typ transakcie:</td>
@@ -73,11 +78,6 @@
                 <Columns>
                     <asp:TemplateField>
                         <ItemTemplate>
-                            <%# Eval(TableColumns.IdTransaction) %>
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField>
-                        <ItemTemplate>
                             <%# Eval(TableColumns.TransactionCategory) %>
                         </ItemTemplate>
                     </asp:TemplateField>
@@ -94,6 +94,11 @@
                     <asp:TemplateField>
                         <ItemTemplate>
                             <%# Eval(TableColumns.CreationDate) %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <%# Eval(TableColumns.Description) %>
                         </ItemTemplate>
                     </asp:TemplateField>
                 </Columns>

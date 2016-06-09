@@ -14,6 +14,12 @@ namespace FinanceManager
     public partial class WalletDetail : System.Web.UI.Page
     {
         protected int idWallet;
+        protected float balance = 0;
+        protected float spendings = 0;
+        protected float gains = 0;
+        protected DateTime last;
+        protected DateTime first;
+
         protected static class TableColumns
         {
             public const string IdTransaction = "IdTransaction";
@@ -22,14 +28,15 @@ namespace FinanceManager
             public const string CreationDate = "CreationDate";
             public const string TransactionType = "TransactionType";
             public const string AccountName = "AccountName";
+            public const string Description = "Description";
         }
 
         protected dynamic GetTransactionsDistribution(List<TransactionDetail> transactions)
         {
-            var  transactionDistribution = from x in transactions
-                                          where x.TransactionType == -1 
+            var transactionDistribution = from x in transactions
+                                          where x.TransactionType == -1 && x.TransactionCategory != "Výber hotovosti"
                                           group x by x.TransactionCategory into g
-                                          select new { Category = (string) g.Key, Value = g.Sum(x => (int) (float.Parse(x.Ammount.Substring(1)))) };
+                                          select new { Category = (string)g.Key, Value = g.Sum(x => (int)(float.Parse(x.Ammount.Substring(1)))) };
 
             return transactionDistribution;
         }
@@ -41,10 +48,10 @@ namespace FinanceManager
             int year = Int32.Parse(nowStr.Substring(6, 4));
             int month = Int32.Parse(nowStr.Substring(3, 2)) - 1;
             int day = Int32.Parse(nowStr.Substring(0, 2));
-            DateTime first = new DateTime(year, month, 1);
-            int[] longMonths = {1, 3, 5, 7, 8, 10, 12};
-            DateTime last;
-            if(longMonths.Contains(month))
+            first = new DateTime(year, month, 1);
+            int[] longMonths = { 1, 3, 5, 7, 8, 10, 12 };
+            //DateTime last;
+            if (longMonths.Contains(month))
             {
                 last = new DateTime(year, month, 31);
             }
@@ -61,6 +68,9 @@ namespace FinanceManager
                 last = new DateTime(year, month, 30);
             }
 
+
+
+
             List<float> values = new List<float>();
 
             values.Add(Ballance);
@@ -69,15 +79,17 @@ namespace FinanceManager
             {
                 var trans = transactions.Where(x => x.CreationDate == DateTime.Now.AddDays(i).ToString("dd/MM/yyyy")).ToList();
                 float dayAmount = 0;
-                foreach (var tran in trans){
+                foreach (var tran in trans)
+                {
                     dayAmount += float.Parse(tran.Ammount);
                 }
-                Ballance += - dayAmount;
+                Ballance += -dayAmount;
                 values.Add(Ballance);
-                i--; 
+                i--;
             }
             values.Reverse();
             values = values.Take(last.Day).ToList();
+
 
             return values;
         }
@@ -107,7 +119,6 @@ namespace FinanceManager
 
             if (!IsPostBack)
             {
-
                 var accounts = Database.GetAccountsPerWallet(idWallet);
                 if (accounts.Count == 0)
                 {
@@ -117,10 +128,14 @@ namespace FinanceManager
                 {
                     List<TransactionDetail> transactions = new List<TransactionDetail>();
                     transactions = Database.GetTransactionsForWallet(idWallet);
-                    //foreach (var account in accounts)
-                    //{
-                    //    transactions.AddRange(Database.GetTransactionsForAccount(account.IdAccount));
-                    //}
+
+                    
+
+                    foreach (var account in accounts)
+                    {
+                        balance += account.Balance;
+                    }
+
                     if (transactions.Count == 0)
                     {
                         //write you have 0 trans.
@@ -132,12 +147,25 @@ namespace FinanceManager
                         ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "tranCount", jsonPie, true);
                         ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "scriptPie", "<script src=\"Scripts/MyScripts/PieChartCategories.js\" type=\"text/javascript\"></script>", false);
 
-                        var transLine = new { balProg = GetBallanceProgress(transactions, float.Parse("1392.8200")) };
+                        var transLine = new { balProg = GetBallanceProgress(transactions, balance) };
                         string jsonLine = "var balanceProgress = " + new JavaScriptSerializer().Serialize(transLine) + ";";
                         ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "balProg", jsonLine, true);
                         ScriptManager.RegisterStartupScript(ContentPanel, ContentPanel.GetType(), "scriptLine", "<script src=\"Scripts/MyScripts/LineGraphBalance.js\" type=\"text/javascript\"></script>", false);
 
-                        
+                        var transNum = Database.GetTransactionsInInterval(idWallet, first, last);
+
+                        foreach (var item in transNum)
+                        {
+                            if (item.TransactionType == 1)
+                            {
+                                spendings += item.Ammount;
+                            }
+                            else
+                            {
+                                gains += item.Ammount;
+                            }
+                        }
+
                         //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                         for (int i = 0; i < transactions.Count; i++)
                         {
@@ -145,13 +173,13 @@ namespace FinanceManager
                         }
                         gwTransactionsResults.DataSource = transactions;
                         gwTransactionsResults.DataBind();
-                        
+
                     }
                 }
 
                 if (txtFrom.Text == null || txtFrom.Text == "")
                 {
-                    txtFrom.Text = DateTime.Today.ToString("yyyy-MM-dd");
+                    txtFrom.Text = DateTime.Today.AddDays(-30).ToString("yyyy-MM-dd");
                 }
 
                 if (txtTo.Text == null || txtTo.Text == "")
@@ -169,7 +197,17 @@ namespace FinanceManager
                     });
                 }
                 FillAccounts(idWallet);
-                
+
+                foreach (ListItem item in cblAccounts.Items)
+                {
+                    item.Selected = true;
+                }
+
+                foreach (ListItem item in cblTransactionCategories.Items)
+                {
+                    item.Selected = true;
+                }
+
             }
             else
             {
@@ -211,10 +249,7 @@ namespace FinanceManager
                 filteredTransactions = Database.GetFilteredTransactions(idWallet, idCategories, from, to, idAccounts);
                 var trans = new { categoryCount = GetTransactionsDistribution(filteredTransactions) };
                 string smth = "var categoryCounts = " + new JavaScriptSerializer().Serialize(trans) + ";";
-                //ScriptManager sm = ScriptManager.GetCurrent(this);
-                //ScriptManager.RegisterClientScriptBlock(this, typeof(Page), "uniqueId" + Guid.NewGuid(), "<script src=\"Scripts/MyScripts/PieChartCategories.js\" type=\"text/javascript\"></script>", false);
 
-                //Page.ClientScript.RegisterClientScriptBlock(this.GetType(), "TRANS", smth, true);
                 for (int i = 0; i < filteredTransactions.Count; i++)
                 {
                     filteredTransactions[i].Ammount = filteredTransactions[i].Ammount + " \u20AC";
@@ -225,7 +260,7 @@ namespace FinanceManager
                 GetTransactionsDistribution(filteredTransactions);
             }
 
-            
+
         }
 
         private void FillAccounts(int idWallet)
@@ -263,5 +298,11 @@ namespace FinanceManager
         {
 
         }
+
+        private void GetWalletDetail(int idWallet)
+        {
+
+        }
+
     }
 }

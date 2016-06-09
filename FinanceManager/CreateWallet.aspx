@@ -34,7 +34,7 @@
                         <asp:Button runat="server" ID="btNewCategory" Text="Pridaj!" OnClick="btnNewCategory_Click" />
                         <asp:CustomValidator runat="server" ID="cvNewCategory" ControlToValidate="tbNewCategory" OnServerValidate="ValidateCategory" CssClass="field-validation-error" ErrorMessage="Kategória už existuje!" />
                     </li>
-                    <div id ="divAccounts">
+                    <asp:Panel ID ="plAccounts" runat="server">
                         <span class="float-left-fieldset">
                             <fieldset>
                                 <legend>Hotovosť</legend>
@@ -67,7 +67,7 @@
                                 </li>
                             </fieldset>
                         </span>
-                    </div>
+                    </asp:Panel>
 
                     <li>
                         <asp:Button runat="server" ID="btCreateWallet" Text="Vytvor!" OnClick="btnCreateWallet_Click" CssClass="float-left" />

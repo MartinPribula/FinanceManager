@@ -310,6 +310,7 @@
     <Compile Include="App_Code\Types\AccountDetail.cs" />
     <Compile Include="App_Code\Types\TransactionCategoryIdName.cs" />
     <Compile Include="App_Code\Types\TransactionDetail.cs" />
+    <Compile Include="App_Code\Types\TransactionNumeric.cs" />
     <Compile Include="App_Code\Types\WalletSummary.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\AuthConfig.cs" />

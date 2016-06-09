@@ -33,9 +33,6 @@
         },
         legend: {
             show: true,
-            rendererOptions: {
-                numberRows: 1
-            },
             location: 's'
         }
     });
